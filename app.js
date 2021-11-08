@@ -6,9 +6,6 @@
 /* https://mediasoup.org/documentation/v3/mediasoup/installation/ */
 import express from "express";
 const app = express();
-
-import https from "httpolyglot";
-import fs from "fs";
 import path from "path";
 const __dirname = path.resolve();
 
@@ -20,13 +17,9 @@ app.get("/", (req, res) => {
 });
 
 app.use("/sfu", express.static(path.join(__dirname, "public")));
-
-// SSL cert for HTTPS access
-const httpsServer = https.createServer({}, app);
-httpsServer.listen(process.env.PORT || 80, () => {
-	console.log("listening on port: " + (process.env.PORT || 80));
+app.listen(process.env.PORT || 80, () => {
+	console.log(`Server running at ${process.env.PORT}:${process.env.IP}`);
 });
-
 const io = new Server(httpsServer);
 
 // socket.io namespace (could represent a room?)
