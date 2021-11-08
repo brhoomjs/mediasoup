@@ -8,7 +8,8 @@ import express from "express";
 const app = express();
 import path from "path";
 const __dirname = path.resolve();
-
+const http = require("http");
+const server = http.createServer(app);
 import { Server } from "socket.io";
 import mediasoup from "mediasoup";
 
@@ -20,7 +21,7 @@ app.use("/sfu", express.static(path.join(__dirname, "public")));
 app.listen(process.env.PORT || 80, () => {
 	console.log(`Server running at ${process.env.PORT}:${process.env.IP}`);
 });
-const io = new Server(app);
+const io = new Server(server);
 
 // socket.io namespace (could represent a room?)
 const peers = io.of("/mediasoup");
