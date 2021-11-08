@@ -8,8 +8,8 @@ import express from "express";
 const app = express();
 import path from "path";
 const __dirname = path.resolve();
-import * as https from "https";
-const server = https.createServer(app);
+import * as http from "https";
+const server = http.createServer(app);
 import { Server } from "socket.io";
 import mediasoup from "mediasoup";
 
