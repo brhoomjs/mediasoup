@@ -20,7 +20,7 @@ app.use("/sfu", express.static(path.join(__dirname, "public")));
 app.listen(process.env.PORT || 80, () => {
 	console.log(`Server running at ${process.env.PORT}:${process.env.IP}`);
 });
-const io = new Server(httpsServer);
+const io = new Server(app);
 
 // socket.io namespace (could represent a room?)
 const peers = io.of("/mediasoup");
