@@ -54,19 +54,9 @@ const streamSuccess = async (stream) => {
 const getLocalStream = async () => {
 	try {
 		const stream = await navigator.mediaDevices.getUserMedia({
-			audio: false,
-			video: {
-				width: {
-					min: 640,
-					max: 1920,
-				},
-				height: {
-					min: 400,
-					max: 1080,
-				},
-			},
+			video: { width: { ideal: 1280 }, height: { ideal: 720 } },
+			audio: true,
 		});
-
 		streamSuccess(stream);
 	} catch (error) {
 		alert(error);
