@@ -8,8 +8,8 @@ import express from "express";
 const app = express();
 import path from "path";
 const __dirname = path.resolve();
-import * as http from "http";
-const server = http.createServer(app);
+import * as https from "https";
+const server = https.createServer(app);
 import { Server } from "socket.io";
 import mediasoup from "mediasoup";
 
@@ -18,7 +18,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/sfu", express.static(path.join(__dirname, "public")));
-app.listen(process.env.PORT || 80, () => {
+app.listen(443, () => {
 	console.log(`Server running at ${process.env.PORT}:${process.env.IP}`);
 });
 const io = new Server(server);
