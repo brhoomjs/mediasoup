@@ -8,7 +8,7 @@ import express from "express";
 const app = express();
 import path from "path";
 const __dirname = path.resolve();
-const http = require("http");
+import * as http from "http";
 const server = http.createServer(app);
 import { Server } from "socket.io";
 import mediasoup from "mediasoup";
