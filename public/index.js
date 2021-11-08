@@ -51,9 +51,9 @@ const streamSuccess = async (stream) => {
 	};
 };
 
-const getLocalStream = () => {
-	navigator.mediaDevices.getUserMedia(
-		{
+const getLocalStream = async () => {
+	try {
+		const stream = await navigator.mediaDevices.getUserMedia({
 			audio: false,
 			video: {
 				width: {
@@ -65,12 +65,13 @@ const getLocalStream = () => {
 					max: 1080,
 				},
 			},
-		},
-		streamSuccess,
-		(error) => {
-			console.log(error.message);
-		}
-	);
+		});
+
+		streamSuccess(stream);
+	} catch (error) {
+		alert(error);
+		console.log(error);
+	}
 };
 
 // A device is an endpoint connecting to a Router on the
