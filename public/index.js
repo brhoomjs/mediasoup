@@ -1,8 +1,6 @@
 //index.js
 const io = require("socket.io-client");
 const mediasoupClient = require("mediasoup-client");
-navigator.getUserMedia =
-	navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 
 const socket = io("/mediasoup");
 
@@ -54,7 +52,7 @@ const streamSuccess = async (stream) => {
 };
 
 const getLocalStream = () => {
-	navigator.getUserMedia(
+	navigator.mediaDevices.getUserMedia(
 		{
 			audio: false,
 			video: {
