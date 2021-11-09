@@ -8,11 +8,16 @@ import express from "express";
 const app = express();
 import path from "path";
 const __dirname = path.resolve();
-import * as http from "https";
-const server = http.createServer(app);
+import * as https from "https";
+
 import { Server } from "socket.io";
 import mediasoup from "mediasoup";
+import fs from "fs";
 
+const options = {
+	key: fs.readFileSync("./privatekey.pem"),
+	cert: fs.readFileSync("./server.crt"),
+};
 app.get("/", (req, res) => {
 	res.send("Hello from mediasoup app!");
 });
@@ -21,6 +26,7 @@ app.use("/sfu", express.static(path.join(__dirname, "public")));
 app.listen(443, () => {
 	console.log(`Server running at ${process.env.PORT}:${process.env.IP}`);
 });
+const server = https.createServer(options, app);
 const io = new Server(server);
 
 // socket.io namespace (could represent a room?)
