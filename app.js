@@ -19,14 +19,16 @@ const options = {
 	cert: fs.readFileSync("./server.crt"),
 };
 app.get("/", (req, res) => {
+	console.log("YEs");
 	res.send("Hello from mediasoup app!");
 });
 
 app.use("/sfu", express.static(path.join(__dirname, "public")));
-app.listen(443, () => {
-	console.log(`Server running at ${process.env.PORT}:${process.env.IP}`);
-});
+// app.listen(443, () => {
+// 	console.log(`Server running at ${process.env.PORT}:${process.env.IP}`);
+// });
 const server = https.createServer(options, app);
+server.listen(443);
 const io = new Server(server);
 
 // socket.io namespace (could represent a room?)
